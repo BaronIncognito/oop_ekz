@@ -1,4 +1,5 @@
 #include <vector>
+#include <iostream>
 using std::vector;
 
 void longestAscendingSubsequence(const vector<char> &v) {
@@ -16,9 +17,17 @@ void longestAscendingSubsequence(const vector<char> &v) {
             current = 1;
         }
     }
-    cout << max << " " << first;
+    std::cout << max << " " << first;
     if (second >= 0) {
-        cout << second;
+        std::cout << second;
     }
-    cout << endl;
+    std::cout << std::endl;
+}
+
+int main(int argc, char* argv[]) {
+    char data[] = "abcde";
+    vector<char> v;
+    v.insert(v.end(), data, data + sizeof(data) / sizeof(char));
+    longestAscendingSubsequence(v);
+    return 0;
 }
