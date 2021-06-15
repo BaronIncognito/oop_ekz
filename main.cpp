@@ -2,31 +2,38 @@
 #include <vector>
 
 using std::vector;
+using namespace std;
 
 void longestAscendingSubsequence(const vector<char> &v) {
-    int size = v.size();
+    if (v.size() == 0) {
+        cout << 0 << endl;
+        return;
+    }
     int max = 0, current = 1;
-    char second = v[0], first;
-    for (int i = 1; i < size; i++) {
+    char first = v[0], second;
+    for (int i = 1; i < v.size(); i++) {
         if (v[i] > v[i - 1]) {
             current++;
         }
         else if (current > max) {
             max = current;
-            second = v[i - current];
-            first = i > current ? v[i - current - 1] : -1;
+            second = v[i - current + 1];
+            first = i >= current ? v[i - current] : -1;
+            current = 1;
+        }
+        else {
             current = 1;
         }
     }
-    std::cout << max << " " << first;
-    if (second >= 0) {
-        std::cout << second;
+    cout << max << " " << first;
+    if (second > 0) {
+        cout << second;
     }
-    std::cout << std::endl;
+    cout << endl;
 }
 
 int main(int argc, char* argv[]) {
-    char data[] = "abirvalghjklm";
+    char data[] = "cdabcdefbcdeabcdefgh";
     vector<char> v;
     v.insert(v.end(), data, data + sizeof(data) / sizeof(char));
     longestAscendingSubsequence(v);
